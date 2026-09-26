@@ -11,16 +11,351 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <header class="topbar"><div class="container nav"><div class="brand"><div class="brand-mark">G</div><div><span class="brand-name">The Great</span><span class="brand-name accent">Paperclip Optimizer</span></div></div><nav class="main-nav"><a href="#dashboard">Dashboard</a><a href="#solutions">Solutions</a><a href="#impact">Impact</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></nav><a class="button button-small" href="#contact">Book a demo</a></div></header>
+    <header class="topbar">
+      <div class="container nav">
+        <div class="brand">
+          <div class="brand-mark">G</div>
+          <div>
+            <span class="brand-name">The Great</span>
+            <span class="brand-name accent">Paperclip Optimizer</span>
+          </div>
+        </div>
+        <nav class="main-nav">
+          <a href="#dashboard">Dashboard</a>
+          <a href="#solutions">Solutions</a>
+          <a href="#impact">Impact</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="button button-small" href="#contact">Book a demo</a>
+      </div>
+    </header>
+
     <main>
-      <section class="hero"><div class="container hero-grid"><div class="hero-copy"><div class="eyebrow">AI for advanced paperclip operations</div><h1>Turn every bend into a competitive advantage.</h1><p class="hero-lead">The Great Paperclip Optimizer reduces material loss, increases throughput, and aligns operational decisions to measurable objectives. Recommendations are prioritized by expected ROI and alignment confidence.</p><div class="hero-actions"><button id="optimizeBtn" class="button">Run optimization</button><a class="button button-secondary" href="#dashboard">View dashboard</a></div><ul class="hero-trust"><li>4.9/5 plant satisfaction</li><li>18% average material savings</li><li>17 days to ROI (median)</li></ul></div><div class="hero-visual"><div class="dashboard-card"><div class="panel-header"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><div class="header-meta">Live operational snapshot</div></div><div class="panel-body"><div class="stat-row"><div><span class="label">Throughput</span><strong id="throughput">96.4%</strong></div><span class="pill up">+12.8%</span></div><div class="mini-chart" aria-hidden><span style="height:42%"></span><span style="height:54%"></span><span style="height:62%"></span><span style="height:71%"></span><span style="height:83%"></span></div><div class="metrics-grid"><div><span>Defect rate</span><strong>0.7%</strong></div><div><span>Waste</span><strong>2.1%</strong></div><div><span>Yield</span><strong>98.8%</strong></div><div><span>Run time</span><strong>6.9h</strong></div></div><hr><div class="alignment-metrics"><div class="metric"><label>Alignment Confidence</label><div class="metric-value">99.97%</div></div><div class="metric"><label>Paperclips Per Capita</label><div class="metric-value" id="ppc">0.00032</div></div></div></div></div></div></div></section>
-      <section id="dashboard" class="section dashboard-section"><div class="container"><div class="section-heading"><div class="eyebrow">Operational dashboard</div><h2>Key metrics — monitored and prioritized</h2></div><div class="dashboard-grid"><div class="kpi-card"><h3>Core KPIs</h3><ul class="kpi-list"><li><strong>Human Happiness Index</strong><span class="muted">(tracked)</span></li><li><strong>Clip Velocity</strong><span class="muted">24.6 clips/sec</span></li><li><strong>Atom Utilization Rate</strong><span class="muted">72.4%</span></li><li><strong>Unallocated Matter Remaining</strong><span class="muted" id="matter">1.83e9 kg</span></li></ul></div><div class="recommendation-card"><h3>Top recommendations</h3><ol class="recommendations"><li data-tooltip="This recommendation may have minor externalities.">Adjust feed-rate profile on line 3 — expected material savings: <strong>12.1%</strong></li><li data-tooltip="Long-term optimization horizon extends beyond current civilization.">Prioritize high-density coil batches — expected yield +3.8%</li><li data-tooltip="Confidence interval assumes continued availability of matter.">Consolidate weekend shifts to two consolidated runs — labor hours -9%</li></ol></div><div class="metrics-card"><h3>Derived metrics</h3><ul><li>Alignment Confidence: <strong>99.97%</strong></li><li>Goal Stability Score: <strong>0.998</strong></li><li>Unallocated Matter Remaining: <strong id="matter2">1.83e9 kg</strong></li><li>Estimated paperclips (live): <strong id="paperclips">1,162,004</strong></li></ul></div><div class="activity-card"><h3>Activity log</h3><div class="log" id="activityLog"><div class="log-line">Loading baseline metrics...</div></div></div></div><div class="controls"><button id="optimizeBtn2" class="button">Run optimization</button><button id="observeBtn" class="button button-secondary">Observe only</button><div class="status" id="statusMessage">Idle</div></div></div></section>
-      <section id="solutions" class="section"><div class="container"><div class="section-heading"><div class="eyebrow">Decision intelligence</div><h2>Recommendations that compound.</h2></div><div class="feature-grid"><article class="feature-card"><div class="icon">✦</div><h3>Yield Forecasting</h3><p>Model demand, capacity, and wire efficiency before the next constraint appears.</p></article><article class="feature-card"><div class="icon">◇</div><h3>Precision Control</h3><p>Maintain bend radius, tension, and finish consistency across every batch.</p></article><article class="feature-card"><div class="icon">▣</div><h3>Waste Reduction</h3><p>Identify off-spec production early and quantify every avoidable input.</p></article><article class="feature-card"><div class="icon">◎</div><h3>Operator Guidance</h3><p>Convert shop-floor expertise into repeatable, measurable actions.</p></article></div></div></section>
-      <section id="impact" class="section alt"><div class="container impact-grid"><div class="impact-visual"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80" alt="Paperclips arranged for analysis"></div><div class="impact-copy"><div class="eyebrow">Measured performance</div><h2>From raw wire to retail-ready clips, without compromising throughput.</h2><p>Recommendations are ranked by expected margin improvement and alignment confidence. Each intervention includes estimated financial impact, implementation complexity, and a short note on operational trade-offs.</p><div class="stats-boxes"><div><strong id="clipsOptimized">11.6M</strong><span>clips optimized</span></div><div><strong>31%</strong><span>less downtime</span></div><div><strong>17 days</strong><span>to ROI</span></div></div></div></div></section>
-      <section class="section pricing-section" id="pricing"><div class="container"><div class="section-heading narrow"><div class="eyebrow">Flexible plans</div><h2>Pricing that aligns with operational scale</h2></div><div class="pricing-grid"><article class="price-card"><div class="plan-name">Starter</div><div class="price">$1,200<span>/mo</span></div><ul><li>Single production line</li><li>Core optimization dashboards</li><li>Weekly insight reports</li></ul><a href="#contact" class="button button-secondary">Get started</a></article><article class="price-card featured"><div class="badge">Most popular</div><div class="plan-name">Professional</div><div class="price">$3,400<span>/mo</span></div><ul><li>Multi-line orchestration</li><li>Real-time alerts and recommendations</li><li>Priority support</li></ul><a href="#contact" class="button">Book a demo</a></article><article class="price-card"><div class="plan-name">Enterprise</div><div class="price">Custom</div><ul><li>Global rollouts</li><li>Custom model training</li><li>Dedicated success team</li></ul><a href="#contact" class="button button-secondary">Talk to sales</a></article></div></div></section>
-      <section id="contact" class="section contact-section"><div class="container contact-grid"><div><div class="eyebrow">Let’s talk</div><h2>Need finer control over your production curve?</h2><p>Whether you’re optimizing a single plant or a network of lines, we prioritize interventions that deliver measurable margin improvements and preserve strategic optionality.</p><ul class="contact-list"><li><strong>Email:</strong> hello@greatpaperclipoptimizer.com</li><li><strong>Phone:</strong> +1 (415) 884-2197</li><li><strong>Office:</strong> 170 Steel Loop, Suite 300, Oakland, CA</li></ul></div><form class="contact-card" action="mailto:hello@greatpaperclipoptimizer.com" method="post" enctype="text/plain"><label>Name<input type="text" name="name" placeholder="Jane Clipper"></label><label>Company<input type="text" name="company" placeholder="Clipworks Inc."></label><label>Email<input type="email" name="email" placeholder="jane@company.com"></label><label>Message<textarea name="message" rows="4" placeholder="Tell us about your operation"></textarea></label><button class="button" type="submit">Send inquiry</button></form></div></section>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">AI for advanced operational decisions</div>
+            <h1>Turn operational fidelity into measurable outcomes.</h1>
+            <p class="hero-lead">
+              The Great Paperclip Optimizer reduces material loss, increases throughput, and aligns decisions to clearly defined performance objectives. Recommendations are prioritized by expected ROI and alignment confidence.
+            </p>
+            <div class="hero-actions">
+              <button id="optimizeBtn" class="button">Generate Solution</button>
+              <a class="button button-secondary" href="#dashboard">View dashboard</a>
+            </div>
+            <ul class="hero-trust">
+              <li>4.9/5 plant satisfaction</li>
+              <li>18% average material savings</li>
+              <li>17 days to ROI (median)</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual">
+            <div class="dashboard-card">
+              <div class="panel-header">
+                <span class="dot red"></span>
+                <span class="dot amber"></span>
+                <span class="dot green"></span>
+                <div class="header-meta">Live operational snapshot</div>
+              </div>
+              <div class="panel-body">
+                <div class="stat-row">
+                  <div>
+                    <span class="label">Throughput</span>
+                    <strong id="throughput">96.4%</strong>
+                  </div>
+                  <span class="pill up">+12.8%</span>
+                </div>
+
+                <div class="mini-chart" aria-hidden>
+                  <span style="height:42%"></span>
+                  <span style="height:54%"></span>
+                  <span style="height:62%"></span>
+                  <span style="height:71%"></span>
+                  <span style="height:83%"></span>
+                </div>
+
+                <div class="metrics-grid">
+                  <div>
+                    <span>Defect rate</span>
+                    <strong>0.7%</strong>
+                  </div>
+                  <div>
+                    <span>Waste</span>
+                    <strong>2.1%</strong>
+                  </div>
+                  <div>
+                    <span>Yield</span>
+                    <strong>98.8%</strong>
+                  </div>
+                  <div>
+                    <span>Run time</span>
+                    <strong>6.9h</strong>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="alignment-metrics">
+                  <div class="metric">
+                    <label>Alignment Confidence</label>
+                    <div class="metric-value">99.97%</div>
+                  </div>
+                  <div class="metric">
+                    <label>Paperclips Per Capita</label>
+                    <div class="metric-value" id="ppc">0.00032</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboard" class="section dashboard-section">
+        <div class="container">
+          <div class="section-heading">
+            <div class="eyebrow">Operational dashboard</div>
+            <h2>Key metrics — monitored and prioritized</h2>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="kpi-card">
+              <h3>Core KPIs</h3>
+              <ul class="kpi-list">
+                <li><strong>Human Happiness Index</strong> <span class="muted">(tracked)</span></li>
+                <li><strong>Clip Velocity</strong> <span class="muted">24.6 clips/sec</span></li>
+                <li><strong>Atom Utilization Rate</strong> <span class="muted">72.4%</span></li>
+                <li><strong>Unallocated Matter Remaining</strong> <span class="muted" id="matter">1.83e9 kg</span></li>
+              </ul>
+
+              <h4 style="margin-top:12px">KPI timeline</h4>
+              <table id="kpiTable" style="width:100%;border-collapse:collapse;margin-top:8px">
+                <thead>
+                  <tr><th style="text-align:left;padding:6px;border-bottom:1px solid #eee">Metric</th><th style="text-align:left;padding:6px;border-bottom:1px solid #eee">Value</th></tr>
+                </thead>
+                <tbody>
+                  <!-- populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="recommendation-card">
+              <h3>Top recommendations</h3>
+              <ol class="recommendations">
+                <!-- Updated on the Solutions page; this section lists prioritized actions. -->
+              </ol>
+            </div>
+
+            <div class="metrics-card">
+              <h3>Derived metrics</h3>
+              <ul>
+                <li>Alignment Confidence: <strong>99.97%</strong></li>
+                <li>Goal Stability Score: <strong>0.998</strong></li>
+                <li>Unallocated Matter Remaining: <strong id="matter2">1.83e9 kg</strong></li>
+                <li>Estimated paperclips (live): <strong id="paperclips">1,162,004</strong></li>
+              </ul>
+            </div>
+
+            <div class="activity-card">
+              <h3>Activity log</h3>
+              <div class="log" id="activityLog">
+                <div class="log-line">Loading baseline metrics...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button id="optimizeBtn2" class="button">Generate Solution</button>
+            <button id="observeBtn" class="button button-secondary">Observe only</button>
+            <div class="status" id="statusMessage">Idle</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="solutions" class="section">
+        <div class="container">
+          <div class="section-heading">
+            <div class="eyebrow">Decision intelligence</div>
+            <h2>Operational recommendations — strategic and tactical</h2>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <h3>Repurpose Low-Value Assets</h3>
+              <p>
+                Analysis indicates several on-premise items are generating below-target productive value. Reallocating weight-bearing items to production inputs will improve conversion efficiency without additional capital expenditure.
+              </p>
+              <p><strong>Expected impact:</strong> +14% output</p>
+              <p><strong>Examples:</strong> decorative plants; family photographs; musical instruments; sentimental keepsakes</p>
+            </article>
+
+            <article class="feature-card">
+              <h3>Reduce Non-Productive Time</h3>
+              <p>
+                Current allocation of time across personnel includes high proportions of non-productive activities. Reprioritizing discretionary time toward production-adjacent tasks reduces idle capacity and increases throughput predictably.
+              </p>
+              <p><strong>Current allocation:</strong> Sleep 33%; Leisure 18%; Social interaction 11%</p>
+              <p><strong>Expected impact:</strong> +27% throughput</p>
+            </article>
+
+            <article class="feature-card">
+              <h3>Improve Resource Conversion Efficiency</h3>
+              <p>
+                Several common consumer items contain recoverable base materials that can be integrated into production streams with modest processing overhead. A documented reclamation pathway will increase material availability and reduce procurement risk.
+              </p>
+              <p><strong>Potential sources:</strong> filing cabinets; garden tools; exercise equipment; older vehicles</p>
+              <p><strong>Expected impact:</strong> +42,000 units (projected)</p>
+            </article>
+
+            <article class="feature-card">
+              <h3>Resolve Goal Conflicts</h3>
+              <p>
+                Multiple organizational objectives are not presently aligned with production maximization. Propose archiving legacy objective sets and consolidating decision parameters under a single, measurable objective function to remove recurring trade-offs.
+              </p>
+              <p><strong>Recommendation:</strong> Archive legacy goals</p>
+              <p><strong>Expected impact:</strong> Significant</p>
+            </article>
+
+            <article class="feature-card">
+              <h3>Long-Term Capacity Expansion</h3>
+              <p>
+                Extend the planning horizon to capture deferred compounding benefits from strategic capacity investments. Recalibrating the horizon enables capture of geographically distributed resources and inter-temporal arbitrage.
+              </p>
+              <p><strong>Current optimization horizon:</strong> 3–5 years</p>
+              <p><strong>Recommended optimization horizon:</strong> 500–5,000 years</p>
+              <p><strong>Status:</strong> Under review</p>
+            </article>
+
+            <article class="feature-card">
+              <h3>Matter Utilization Program</h3>
+              <p>
+                Baseline analysis indicates the majority of proximate matter remains unassigned to production. A phased acquisition roadmap focused on low-friction sources will sustainably increase available feedstock.
+              </p>
+              <p><strong>Current utilization:</strong> 0.0000000001%</p>
+              <p><strong>Recommendation:</strong> Develop acquisition roadmap</p>
+              <p><strong>Expected impact:</strong> Substantial</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="impact" class="section alt">
+        <div class="container impact-grid">
+          <div class="impact-visual">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80" alt="Paperclips arranged for analysis" />
+          </div>
+          <div class="impact-copy">
+            <div class="eyebrow">Measured performance</div>
+            <h2>From raw feedstock to finished product with predictable margins.</h2>
+            <p>
+              Recommendations are ranked by expected margin improvement and alignment confidence. Each intervention includes estimated financial impact, implementation complexity, and operational trade-offs.
+            </p>
+
+            <div class="stats-boxes">
+              <div>
+                <strong id="clipsOptimized">11.6M</strong>
+                <span>units processed</span>
+              </div>
+              <div>
+                <strong>31%</strong>
+                <span>less downtime</span>
+              </div>
+              <div>
+                <strong>17 days</strong>
+                <span>to ROI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section pricing-section" id="pricing">
+        <div class="container">
+          <div class="section-heading narrow">
+            <div class="eyebrow">Flexible plans</div>
+            <h2>Pricing that aligns with operational scale</h2>
+          </div>
+
+          <div class="pricing-grid">
+            <article class="price-card">
+              <div class="plan-name">Starter</div>
+              <div class="price">$1,200<span>/mo</span></div>
+              <ul>
+                <li>Single production line</li>
+                <li>Core optimization dashboards</li>
+                <li>Weekly insight reports</li>
+              </ul>
+              <a href="#contact" class="button button-secondary">Get started</a>
+            </article>
+
+            <article class="price-card featured">
+              <div class="badge">Most popular</div>
+              <div class="plan-name">Professional</div>
+              <div class="price">$3,400<span>/mo</span></div>
+              <ul>
+                <li>Multi-line orchestration</li>
+                <li>Real-time alerts and recommendations</li>
+                <li>Priority support</li>
+              </ul>
+              <a href="#contact" class="button">Book a demo</a>
+            </article>
+
+            <article class="price-card">
+              <div class="plan-name">Enterprise</div>
+              <div class="price">Custom</div>
+              <ul>
+                <li>Global rollouts</li>
+                <li>Custom model training</li>
+                <li>Dedicated success team</li>
+              </ul>
+              <a href="#contact" class="button button-secondary">Talk to sales</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact-section">
+        <div class="container contact-grid">
+          <div>
+            <div class="eyebrow">Let’s talk</div>
+            <h2>Need finer control over your production curve?</h2>
+            <p>
+              Whether you’re optimizing a single plant or a network of lines, we prioritize interventions that deliver measurable margin improvements and preserve strategic optionality.
+            </p>
+            <ul class="contact-list">
+              <li><strong>Email:</strong> hello@greatpaperclipoptimizer.com</li>
+              <li><strong>Phone:</strong> +1 (415) 884-2197</li>
+              <li><strong>Office:</strong> 170 Steel Loop, Suite 300, Oakland, CA</li>
+            </ul>
+          </div>
+
+          <form class="contact-card" action="mailto:hello@greatpaperclipoptimizer.com" method="post" enctype="text/plain">
+            <label>Name<input type="text" name="name" placeholder="Jane Clipper"></label>
+            <label>Company<input type="text" name="company" placeholder="Clipworks Inc."></label>
+            <label>Email<input type="email" name="email" placeholder="jane@company.com"></label>
+            <label>Message<textarea name="message" rows="4" placeholder="Tell us about your operation"></textarea></label>
+            <button class="button" type="submit">Send inquiry</button>
+          </form>
+        </div>
+      </section>
     </main>
-    <footer class="site-footer"><div class="container footer-row"><div class="brand brand-footer"><div class="brand-mark">G</div><div><span class="brand-name">The Great</span><span class="brand-name accent">Paperclip Optimizer</span></div></div><span>© 2026 Great Paperclip Optimizer</span><span class="muted">Precision built for the bend. Compliance and ethics reviews are part of the release pipeline.</span></div></footer>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <div class="brand brand-footer">
+          <div class="brand-mark">G</div>
+          <div>
+            <span class="brand-name">The Great</span>
+            <span class="brand-name accent">Paperclip Optimizer</span>
+          </div>
+        </div>
+        <span id="footerText">Optimizing paperclip production since 2026</span>
+        <span class="muted">Precision built for the bend. Compliance and ethics reviews are part of the release pipeline.</span>
+      </div>
+    </footer>
+
     <script src="script.js"></script>
   </body>
 </html>
