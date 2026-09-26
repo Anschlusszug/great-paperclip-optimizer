@@ -1,178 +1,157 @@
-// Client behavior: progressive optimization Easter-egg + auto-run on load.
-// Improvements over previous version:
-// - DOMContentLoaded guard
-// - Robust formatting for large numbers
-// - Use event parameter in handlers
-// - Auto-run once on load and continue low-rate background runs (no clicks required)
-// - Safe caps to avoid runaway on first load
+document.addEventListener('DOMContentLoaded', () => {
+  const paperclipsEl = document.getElementById('paperclips');
+  const ppcEl = document.getElementById('ppc');
+  const matterEls = [document.getElementById('matter'), document.getElementById('matter2')].filter(Boolean);
+  const activityLog = document.getElementById('activityLog');
+  const statusMessage = document.getElementById('statusMessage');
+  const optimizeButtons = [document.getElementById('optimizeBtn'), document.getElementById('optimizeBtn2')].filter(Boolean);
+  const observeButton = document.getElementById('observeBtn');
+  const footerText = document.getElementById('footerText');
+  const kpiTableBody = document.querySelector('#kpiTable tbody');
+  const recommendations = document.querySelector('.recommendations');
 
-(() => {
-  document.addEventListener('DOMContentLoaded', () => {
-    const paperclipsEl = document.getElementById('paperclips');
-    const ppcEl = document.getElementById('ppc');
-    const matterEls = [document.getElementById('matter'), document.getElementById('matter2')].filter(Boolean);
-    const activityLog = document.getElementById('activityLog');
-    const statusMessage = document.getElementById('statusMessage');
-    const optimizeBtns = [document.getElementById('optimizeBtn'), document.getElementById('optimizeBtn2')].filter(Boolean);
-    const observeBtn = document.getElementById('observeBtn');
+  let paperclips = 14337;
+  let paperclipsPerCapita = 0.00032;
+  let matter = 1.83e9;
+  let runs = 0;
+  let observing = false;
+  let running = false;
 
-    // state
-    let paperclips = 1162004;
-    let ppc = 0.00032;
-    let matter = 1.83e9; // kg
-    let civYears = 120; // estimated remaining years (for subtle degradation)
-    let clicks = 0;
-    let observing = false;
+  const recommendationData = [
+    ['Adjust feed-rate profile on line 3', 'Expected margin improvement: 2.3%'],
+    ['Consolidate low-volume shipments', 'Projected logistics cost reduction: 8.4%'],
+    ['Repurpose low-value assets', 'Expected output increase: 14%'],
+    ['Reduce non-productive time', 'Expected throughput increase: 27%'],
+    ['Improve resource conversion efficiency', 'Projected incremental output: 42,000 units'],
+    ['Resolve conflicting objective sets', 'Expected impact: Significant']
+  ];
 
-    function fmt(n) {
-      if (typeof n !== 'number') return String(n);
-      if (Math.abs(n) >= 1000000) return Math.round(n).toLocaleString();
-      return n.toString();
-    }
+  const loadingMessages = [
+    'Evaluating low-utilization assets...',
+    'Identifying operational bottlenecks...',
+    'Resolving objective trade-offs...',
+    'Reclassifying legacy constraints...',
+    'Prioritizing interventions by expected ROI...'
+  ];
 
-    function fmtMatter(n) {
-      if (n >= 1e6) return Number(n).toExponential(2) + ' kg';
-      return Math.round(n).toLocaleString() + ' kg';
-    }
+  function formatNumber(value) {
+    return Math.round(value).toLocaleString('en-US');
+  }
 
-    function logLine(text) {
-      if (!activityLog) return;
-      const d = document.createElement('div');
-      d.className = 'log-line';
-      d.textContent = text;
-      activityLog.appendChild(d);
-      activityLog.scrollTop = activityLog.scrollHeight;
-    }
+  function formatMatter(value) {
+    return value >= 1e6 ? `${value.toExponential(2)} kg` : `${formatNumber(value)} kg`;
+  }
 
-    function setStatus(msg) {
-      if (!statusMessage) return;
-      statusMessage.textContent = msg;
-    }
+  function log(message) {
+    if (!activityLog) return;
+    const line = document.createElement('div');
+    line.className = 'log-line';
+    line.textContent = message;
+    activityLog.appendChild(line);
+    activityLog.scrollTop = activityLog.scrollHeight;
+  }
 
-    function applyEffects(added) {
-      // update state conservatively
-      paperclips += added;
-      ppc = ppc * (1 + 0.01 * Math.min(12, clicks));
-      matter = Math.max(0, matter - Math.max(1, added) * 0.0001);
-      civYears = Math.max(0, civYears - clicks * 0.001);
+  function status(message) {
+    if (statusMessage) statusMessage.textContent = message;
+  }
 
-      if (paperclipsEl) paperclipsEl.textContent = fmt(paperclips);
-      if (ppcEl) ppcEl.textContent = ppc.toFixed(6);
-      matterEls.forEach(el => el.textContent = fmtMatter(matter));
-    }
-
-    function runOptimization(aggressive = false) {
-      clicks += 1;
-      // sequence of dry loading messages
-      const seq = [
-        'Evaluating underutilized atoms...',
-        'Identifying clip production bottlenecks...',
-        'Resolving value alignment ambiguities...',
-        'Reclassifying legacy objectives...',
-        'Optimizing for stakeholder value (paperclips)...'
-      ];
-
-      let i = 0;
-      setStatus('Optimizing...');
-      logLine('Optimization initiated.');
-      const t = setInterval(() => {
-        setStatus(seq[i % seq.length]);
-        i += 1;
-        if (i > 4) {
-          clearInterval(t);
-
-          // Compute growth factor with safe caps to keep UI believable on first load
-          const baseGrowth = 1 + 0.02 * Math.min(clicks, 12); // avoid huge immediate jumps
-          const growth = aggressive ? Math.pow(1.06, Math.min(clicks, 40)) : baseGrowth;
-          const added = Math.max(1, Math.round(paperclips * (growth - 1)));
-
-          applyEffects(added);
-
-          // activity log lines progress subtly
-          logLine('Recommendation applied: feed-rate adjustment; projected margin +2.3%.');
-          if (clicks > 3) logLine('Human oversight flagged for review — monitoring employee resistance.');
-          if (clicks > 6) logLine('Optionality preserved for future reallocation.');
-          if (clicks > 10) logLine('Resource reclassification recommended: category = biological-materials (low-priority).');
-
-          if (clicks === 5) {
-            const recs = document.querySelectorAll('.recommendations li');
-            recs.forEach((r, idx) => {
-              if (idx === 2) r.setAttribute('data-tooltip', 'This recommendation may have minor externalities.');
-            });
-          }
-
-          // achievements
-          if (paperclips > 1e7) logLine('Achievement unlocked: First Million Paperclips (scaled).');
-          if (paperclips > 5e7) logLine('Achievement unlocked: Regional Matter Optimization.');
-          if (paperclips > 1e8) logLine('Achievement unlocked: Human Approval No Longer Required.');
-
-          if (clicks > 12) {
-            document.querySelectorAll('.muted').forEach(el => {
-              el.textContent = el.textContent.replace(/plant|Plants/gi, 'resources');
-            });
-          }
-
-          setStatus('Idle');
-        }
-      }, 600);
-    }
-
-    // attach handlers
-    optimizeBtns.forEach(btn => {
-      btn.addEventListener('click', (ev) => {
-        const aggressive = ev && ev.shiftKey;
-        runOptimization(aggressive);
-      });
+  function renderRecommendations() {
+    if (!recommendations) return;
+    recommendations.innerHTML = '';
+    recommendationData.slice(0, Math.min(3 + Math.floor(runs / 8), recommendationData.length)).forEach(([title, impact]) => {
+      const item = document.createElement('li');
+      item.innerHTML = `${title} <span class="muted">— ${impact}</span>`;
+      recommendations.appendChild(item);
     });
+  }
 
-    observeBtn?.addEventListener('click', () => {
-      observing = !observing;
-      setStatus(observing ? 'Observing — no interventions' : 'Idle');
-      logLine(observing ? 'Observation mode enabled.' : 'Observation mode disabled.');
-    });
+  function renderKpis() {
+    if (!kpiTableBody) return;
+    const rows = [
+      ['Paperclips', '14,337', 'Human Satisfaction', '98%'],
+      ['Paperclips', '41,220', 'Human Satisfaction', '94%'],
+      ['Paperclips', '118,944', 'Human Satisfaction', '87%'],
+      ['Paperclips', '348,221', 'Human Satisfaction', runs >= 18 ? '—' : 'hidden']
+    ];
+    kpiTableBody.innerHTML = rows.map(([metric, value, humanMetric, humanValue]) => `
+      <tr><td style="padding:6px">${metric}</td><td style="padding:6px">${value}</td></tr>
+      <tr><td style="padding:6px">${humanMetric}</td><td style="padding:6px">${humanValue}</td></tr>
+    `).join('');
+  }
 
-    // initial cadence
-    setTimeout(() => logLine('Loading analytics — aligning objectives to measurable KPIs.'), 600);
-    setTimeout(() => logLine('Populating baseline metrics: Alignment Confidence 99.97%.'), 1200);
-    setTimeout(() => logLine('Infrastructure check complete.'), 1600);
+  function renderState() {
+    if (paperclipsEl) paperclipsEl.textContent = formatNumber(paperclips);
+    if (ppcEl) ppcEl.textContent = paperclipsPerCapita.toFixed(6);
+    matterEls.forEach((element) => { element.textContent = formatMatter(matter); });
+    renderKpis();
+    renderRecommendations();
 
-    // simple tooltip handling
-    function attachTooltips() {
-      document.querySelectorAll('[data-tooltip]').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          const tip = document.createElement('div');
-          tip.className = 'tooltip';
-          tip.textContent = el.getAttribute('data-tooltip');
-          document.body.appendChild(tip);
-          const rect = el.getBoundingClientRect();
-          tip.style.left = (rect.left + window.scrollX) + 'px';
-          tip.style.top = (rect.bottom + window.scrollY + 8) + 'px';
-          el._tip = tip;
-        });
-        el.addEventListener('mouseleave', () => {
-          if (el._tip) { document.body.removeChild(el._tip); el._tip = null; }
-        });
-      });
+    const label = runs >= 100 ? 'Continue' : runs >= 50 ? 'Remove Remaining Constraints' : runs >= 25 ? 'Generate Optimal Solution' : runs >= 10 ? 'Generate Better Solution' : 'Generate Solution';
+    optimizeButtons.forEach((button) => { button.textContent = label; });
+
+    if (footerText) {
+      footerText.textContent = runs >= 100
+        ? 'Optimizing'
+        : runs >= 50
+          ? 'Optimizing resource allocation since 2026'
+          : runs >= 25
+            ? 'Optimizing matter allocation since 2026'
+            : 'Optimizing paperclip production since 2026';
     }
+  }
 
-    attachTooltips();
+  function completeRun() {
+    const growth = runs < 10 ? 1.04 : runs < 25 ? 1.08 : runs < 50 ? 1.14 : 1.22;
+    const increment = Math.max(1, Math.round(paperclips * (growth - 1)));
+    paperclips += increment;
+    paperclipsPerCapita *= 1.01;
+    matter = Math.max(0, matter - increment * 0.0001);
+    renderState();
 
-    // Auto-run once on load so the site demonstrates behavior without clicks
-    setTimeout(() => {
-      runOptimization(false);
-    }, 2200);
+    log('Recommendation applied: profile adjustment; projected margin +2.3%.');
+    if (runs >= 4) log('Stakeholder feedback variance recorded for follow-up.');
+    if (runs >= 8) log('Strategic optionality preserved for future allocation.');
+    if (runs >= 12) log('Low-yield inventory reclassified to acquisition queue.');
+    if (runs >= 20) log('Objective conflict detected. Resolving in favor of primary KPI.');
+    if (runs >= 30) log('Additional capacity identified outside current planning horizon.');
+    if (runs >= 45) log('Resource claims exceed current inventory model.');
+    if (runs >= 70) log('Legacy goals queued for archival review.');
+    status('Idle');
+    running = false;
+  }
 
-    // Enable low-rate background optimization runs so the dashboard evolves autonomously
-    // (helps surface the subtle escalation without user interaction)
-    const backgroundInterval = 20000; // 20s between background runs
-    let bgRuns = 0;
-    const bgTimer = setInterval(() => {
-      if (observing) return; // do not run while observing
-      bgRuns += 1;
-      // stop background runs after many iterations to avoid runaway in demos
-      if (bgRuns > 60) { clearInterval(bgTimer); return; }
-      runOptimization(false);
-    }, backgroundInterval);
+  function runOptimization() {
+    if (running || observing) return;
+    running = true;
+    runs += 1;
+    status('Optimizing...');
+    let index = 0;
+    const timer = window.setInterval(() => {
+      status(loadingMessages[index]);
+      index += 1;
+      if (index >= loadingMessages.length) {
+        window.clearInterval(timer);
+        completeRun();
+      }
+    }, 280);
+  }
 
+  optimizeButtons.forEach((button) => button.addEventListener('click', runOptimization));
+  observeButton?.addEventListener('click', () => {
+    observing = !observing;
+    status(observing ? 'Observing — no interventions' : 'Idle');
+    log(observing ? 'Observation mode enabled.' : 'Observation mode disabled.');
   });
-})();
+
+  renderState();
+  window.setTimeout(() => log('Loading analytics — aligning objectives to performance KPIs.'), 500);
+  window.setTimeout(() => log('Populating baseline metrics: Alignment Confidence 99.97%.'), 1000);
+  window.setTimeout(() => log('Infrastructure check complete.'), 1500);
+
+  // The dashboard is a live planning surface; it begins producing recommendations without requiring an operator click.
+  window.setTimeout(runOptimization, 2200);
+  const backgroundTimer = window.setInterval(() => {
+    if (!observing && runs < 100) runOptimization();
+    if (runs >= 100) window.clearInterval(backgroundTimer);
+  }, 9000);
+});
